@@ -47,6 +47,7 @@
                 <div class="offset-3 col-6"><strong>Runtime:</strong> {{ strlen($runtime) ? $runtime : 'Unknown' }}</div>
             </div>
 
+            @if (count($cast) > 0)
             <div class="row">
                 <div class="offset-3 col-6"><hr/></div>
             </div>
@@ -73,6 +74,7 @@
                     </ul>
                 </div>
             </div>
+            @endif
 
             @endisset
         </div>
