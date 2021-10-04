@@ -44,7 +44,7 @@
             </div>
 
             <div class="row">
-                <div class="offset-3 col-6"><strong>Runtime:</strong> {{ $runtime }}</div>
+                <div class="offset-3 col-6"><strong>Runtime:</strong> {{ strlen($runtime) ? $runtime : 'Unknown' }}</div>
             </div>
 
             <div class="row">
