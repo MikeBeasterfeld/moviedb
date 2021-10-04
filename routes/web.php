@@ -15,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function() {
 
-    $movie_search_url = 'https://api.themoviedb.org/3/search/movie?api_key=' . config('myconfig.moviedb-api-key') . '&query=' . request('search');
+    if (strlen(request('search')) < 1) {
+        return view('welcome', [
+            'error' => 'Movie title must be provided'
+        ]);
+    }
+
+    $search = urlencode(request('search'));
+
+    $movie_search_url = 'https://api.themoviedb.org/3/search/movie?api_key=' . config('myconfig.moviedb-api-key') . '&query=' . $search;
 
     $search_response = Http::get($movie_search_url);
 
