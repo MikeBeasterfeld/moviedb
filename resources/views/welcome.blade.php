@@ -40,7 +40,7 @@
             </div>
 
             <div class="row">
-                <div class="offset-3 col-6"><strong>Release Date:</strong> {{ $movie->{'release_date'} }}</div>
+                <div class="offset-3 col-6"><strong>Release Date:</strong> {{ strlen($movie->{'release_date'}) ? $movie->{'release_date'} : 'Unknown' }}</div>
             </div>
 
             <div class="row">
