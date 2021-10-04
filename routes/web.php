@@ -55,12 +55,18 @@ Route::get('/', function() {
 
     $movie_details = json_decode($movie_detail_response);
 
-    if ($movie_details->{'runtime'} <= 60) {
-        $runtime = $movie_details->{'runtime'} . ' minutes';
-    } elseif ($movie_details->{'runtime'} % 60 == 0) {
-        $runtime = $movie_details->{'runtime'} / 60 . ' hours';
-    } else {
-        $runtime = sprintf('%d hours, %d minutes', floor($movie_details->{'runtime'} / 60), $movie_details->{'runtime'} % 60);
+    $runtime = '';
+
+    if (floor($movie_details->{'runtime'} / 60) > 0) {
+        $runtime = floor($movie_details->{'runtime'} / 60) . ' hour' . (floor($movie_details->{'runtime'} / 60) > 1 ? 's' : '');
+    }
+
+    if ($movie_details->{'runtime'} % 60 != 0) {
+        if (strlen($runtime) > 0 ) {
+            $runtime .= ', ';
+        }
+
+        $runtime .= ($movie_details->{'runtime'} % 60) . ' minute' . ($movie_details->{'runtime'} % 60 > 1 ? 's' : '');
     }
 
     $movie_credits_url = 'https://api.themoviedb.org/3/movie/' . $first_result->{'id'} . '/credits?api_key=' . config('myconfig.moviedb-api-key');
